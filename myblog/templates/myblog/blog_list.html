@@ -1,0 +1,21 @@
+{% extends 'myblog/base.html' %}
+{% load static %}
+
+{% block title %}All Blogs - My Blog{% endblock %}
+
+{% block content %}
+<h2>All Blogs</h2>
+<ul>
+    {% for blog in blogs %}
+    <li>
+        <a href="{% url 'blog_detail' pk=blog.pk %}">{{ blog.title }}</a>
+        ({{ blog.views }} views) |
+        <a href="{% url 'blog_edit' pk=blog.pk %}">Edit</a> |
+        <a href="{% url 'blog_delete' pk=blog.pk %}">Delete</a>
+    </li>
+    {% empty %}
+    <li>No blogs yet. <a href="{% url 'blog_create' %}">Add one</a>.</li>
+    {% endfor %}
+</ul>
+<a href="{% url 'blog_create' %}" class="btn">Add New Blog</a>
+{% endblock %}
